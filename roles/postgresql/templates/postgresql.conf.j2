@@ -1,0 +1,10 @@
+listen_addresses = '{{ listen_addresses }}'
+max_connections = {{ max_connections }}
+shared_buffers = '{{ shared_buffers }}'
+effective_cache_size = '{{ effective_cache_size }}'
+work_mem = '{{ work_mem }}'
+maintenance_work_mem = '{{ maintenance_work_mem }}'
+log_min_duration_statement = {{ log_min_duration_statement }}
+log_directory = 'pg_log'
+logging_collector = on
+log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'

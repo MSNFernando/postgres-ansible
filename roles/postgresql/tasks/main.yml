@@ -1,0 +1,35 @@
+- name: Install PostgreSQL
+  apt:
+    name: "postgresql-{{ postgresql_version }}"
+    state: present
+  tags: postgres
+
+- name: Ensure PostgreSQL is running
+  systemd:
+    name: postgresql
+    enabled: true
+    state: started
+
+- name: Configure postgresql.conf
+  template:
+    src: postgresql.conf.j2
+    dest: "/etc/postgresql/{{ postgresql_version }}/main/postgresql.conf"
+    owner: postgres
+    group: postgres
+    mode: 0644
+  notify: Restart PostgreSQL
+
+- name: Configure pg_hba.conf
+  template:
+    src: pg_hba.conf.j2
+    dest: "/etc/postgresql/{{ postgresql_version }}/main/pg_hba.conf"
+    owner: postgres
+    group: postgres
+    mode: 0640
+  notify: Restart PostgreSQL
+
+- name: Allow external connections (adjust firewall if needed)
+  ufw:
+    rule: allow
+    port: 5432
+    proto: tcp

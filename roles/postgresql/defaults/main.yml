@@ -1,0 +1,12 @@
+postgresql_version: 14
+listen_addresses: '*'
+max_connections: 1500
+shared_buffers: "2GB"
+effective_cache_size: "6GB"
+work_mem: "8MB"
+maintenance_work_mem: "512MB"
+log_min_duration_statement: -1
+allowed_cidrs:
+  - "10.30.0.0/20"
+  - "192.168.0.0/24"
+password_encryption: "scram-sha-256"
